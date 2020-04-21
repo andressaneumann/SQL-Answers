@@ -1,0 +1,52 @@
+﻿1.  Anand Beck
+
+
+SQL: SELECT name FROM member join checkout_item on (member.id = checkout_item.member_id) join book on (checkout_item.book_id = book.id) where book.title = 'The Hobbit';
+
+
+2. 37 people
+
+
+SQL: SELECT count(name) from member where id not in (select member_id from checkout_item);
+
+
+3. 
+
+
+Books:
+Fellowship of the Ring|2
+1984|6
+Tom Sawyer|7
+Catcher in the Rye|8
+To Kill a Mockingbird|9
+Domain Driven Design|10
+
+
+SQL: select title, id from book left join checkout_item on book.id = checkout_item.book_id WHERE checkout_item.book_id IS NULL;
+
+
+Movies: 
+Thin Red Line|6
+Crouching Tiger, Hidden Dragon|7
+Lawrence of Arabia|8
+Office Space|9
+
+
+SQL: select title, id from movie left join checkout_item on movie.id = checkout_item.movie_id WHERE checkout_item.movie_id IS NULL;
+
+
+4. 
+
+
+INSERT INTO book (id, title) values (11, 'The Pragmatic Programmer');
+INSERT INTO member (id, name) values (43, 'Andressa Silva');
+INSERT INTO checkout_item(member_id, book_id) VALUES (43, 11);
+
+
+SELECT name FROM member join checkout_item on (member.id = checkout_item.member_id) join book on (checkout_item.book_id = book.id) where book.title = 'The Pragmatic Programmer';
+
+
+5.  Anand Beck
+
+
+select name from member where (select count(book_id) from checkout_item where member.id = checkout_item.member_id) > 1 order by member.id;
